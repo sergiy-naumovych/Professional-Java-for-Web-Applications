@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           targetNamespace="http://example.com/xmlns/support"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:support="http://example.com/xmlns/support">
+    <xs:element name="ticketsRequest" type="support:ticketsRequestType" />
+    <xs:element name="ticketRequest" type="support:selectTicketType" />
+    <xs:element name="createTicket" type="support:createTicketType"/>
+    <xs:element name="deleteTicket" type="support:selectTicketType"/>
+    <xs:element name="ticket" type="support:ticketType" />
+    <xs:element name="tickets" type="support:ticketsType" />
+    <xs:complexType name="ticketType">
+        <xs:sequence>
+            <xs:element type="xs:long" name="id" minOccurs="0"/>
+            <xs:element type="xs:string" name="customerName" minOccurs="0"/>
+            <xs:element type="xs:dateTime" name="dateCreated" minOccurs="0"/>
+            <xs:element type="xs:string" name="subject"/>
+            <xs:element type="xs:string" name="body"/>
+            <xs:element type="support:attachmentType" name="attachment"
+                        minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ticketsRequestType">
+        <xs:sequence />
+    </xs:complexType>
+    <xs:complexType name="selectTicketType">
+        <xs:sequence>
+            <xs:element type="xs:long" name="id"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="createTicketType">
+        <xs:sequence>
+            <xs:element type="support:ticketType" name="ticket"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ticketsType">
+        <xs:sequence>
+            <xs:element type="support:ticketType" name="ticket" minOccurs="0"
+                        maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="attachmentType">
+        <xs:sequence>
+            <xs:element type="xs:string" name="name"/>
+            <xs:element type="xs:string" name="mimeContentType"/>
+            <xs:element type="xs:base64Binary" name="contents"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

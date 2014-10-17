@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="742782f6-0c42-41cd-88f4-41094174db24" />
+          <option name="name" value="MySQL Customer Support" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/database/create.sql" />
+            </array>
+          </option>
+        </State>
+      </list>
+    </option>
+  </component>
+</project>
+

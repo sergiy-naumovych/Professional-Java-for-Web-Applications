@@ -1,0 +1,19 @@
+<%--@elvariable id="userForm" type="com.wrox.site.UserForm"--%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>${title}</title>
+    </head>
+    <body>
+        <h1>${title}</h1>
+        <form:form method="post" modelAttribute="userForm">
+            <form:label path="username">Username</form:label><br />
+            <form:input path="username" /><br />
+            <br />
+            <form:label path="name">Name:</form:label><br />
+            <form:input path="name" /><br />
+            <br />
+            <input type="submit" value="Save" />
+        </form:form>
+    </body>
+</html>

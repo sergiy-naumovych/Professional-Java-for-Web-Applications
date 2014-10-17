@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:sws="http://www.springframework.org/schema/web-services"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+            http://www.springframework.org/schema/web-services
+            http://www.springframework.org/schema/web-services/web-services-2.0.xsd">
+
+    <sws:annotation-driven marshaller="jaxb2Marshaller"
+                           unmarshaller="jaxb2Marshaller" />
+    <sws:dynamic-wsdl id="support" portTypeName="Support"
+                      locationUri="/services/Soap/" createSoap11Binding="false"
+                      createSoap12Binding="true"
+                      targetNamespace="http://example.com/xmlns/support">
+        <sws:xsd location="/WEB-INF/xsd/soap/support.xsd" />
+    </sws:dynamic-wsdl>
+
+</beans>

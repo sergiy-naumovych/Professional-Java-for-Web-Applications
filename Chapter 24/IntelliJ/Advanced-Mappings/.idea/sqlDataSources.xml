@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="b84000a4-8104-46e2-b36a-c0c900f59b04" />
+          <option name="name" value="MySQL Advanced-Mappings" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/database/create.sql" />
+            </array>
+          </option>
+        </State>
+      </list>
+    </option>
+  </component>
+</project>
+

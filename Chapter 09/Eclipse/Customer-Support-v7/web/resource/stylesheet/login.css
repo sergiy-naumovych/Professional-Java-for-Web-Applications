@@ -1,0 +1,7 @@
+#bodyTable .sidebarCell {
+    display: none;
+}
+
+#bodyTable .contentCell {
+    padding: 0;
+}

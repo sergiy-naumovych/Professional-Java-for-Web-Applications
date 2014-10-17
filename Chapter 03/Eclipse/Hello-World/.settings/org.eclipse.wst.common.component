@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="hello-world">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/web" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/source/production/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/source/production/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/source/test/java/unit"/>
+        <property name="context-root" value="hello-world"/>
+        <property name="java-output-path" value="/hello-world/target/classes"/>
+    </wb-module>
+</project-modules>

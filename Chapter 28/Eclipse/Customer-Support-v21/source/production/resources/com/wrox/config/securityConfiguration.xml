@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:oauth2="http://www.springframework.org/schema/security/oauth2"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-3.2.xsd
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/security/oauth2
+http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
+
+    <beans:bean id="userService" class="com.wrox.site.DefaultUserService" />
+    <beans:bean id="webServiceClientService"
+                class="com.wrox.site.DefaultWebServiceClientService" />
+    <beans:bean id="clientDetailsUserService"
+                class="org.springframework.security.oauth2.provider.client.ClientDetailsUserDetailsService">
+        <beans:constructor-arg ref="webServiceClientService" />
+    </beans:bean>
+
+    <beans:bean id="sessionRegistry"
+                class="org.springframework.security.core.session.SessionRegistryImpl" />
+
+    <beans:bean id="webSecurityExpressionHandler"
+                class="org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler" />
+    <beans:bean id="methodSecurityExpressionHandler"
+                class="org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler" />
+
+    <beans:bean id="passwordEncoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+    <beans:bean id="tokenServices"
+                class="com.wrox.site.DefaultAccessTokenServices" />
+
+    <beans:bean id="userApprovalHandler"
+                class="org.springframework.security.oauth2.provider.approval.TokenServicesUserApprovalHandler">
+        <beans:property name="tokenServices" ref="tokenServices" />
+    </beans:bean>
+
+    <beans:bean id="oauthAccessDeniedHandler"
+                class="org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler" />
+
+    <beans:bean id="oauthAuthenticationEntryPoint"
+                class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint" />
+
+    <authentication-manager>
+        <authentication-provider user-service-ref="userService">
+            <password-encoder ref="passwordEncoder" />
+        </authentication-provider>
+    </authentication-manager>
+
+    <authentication-manager id="oauthClientAuthenticationManager">
+        <authentication-provider user-service-ref="clientDetailsUserService">
+            <password-encoder ref="passwordEncoder" />
+        </authentication-provider>
+    </authentication-manager>
+
+    <oauth2:authorization-server token-services-ref="tokenServices"
+                 client-details-service-ref="webServiceClientService"
+                 user-approval-page="oauth/authorize" error-page="oauth/error">
+        <oauth2:authorization-code />
+    </oauth2:authorization-server>
+
+    <beans:bean id="nonceServices"
+                class="com.wrox.site.DefaultOAuthNonceServices" />
+    <beans:bean id="resourceServerFilter"
+                class="com.wrox.site.OAuthSigningTokenAuthenticationFilter">
+        <beans:property name="authenticationEntryPoint"
+                        ref="oauthAuthenticationEntryPoint" />
+        <beans:property name="nonceServices" ref="nonceServices" />
+        <beans:property name="tokenServices" ref="tokenServices" />
+        <beans:property name="resourceId" value="SUPPORT" />
+    </beans:bean>
+
+    <global-method-security pre-post-annotations="enabled" order="0"
+                            proxy-target-class="true">
+        <expression-handler ref="methodSecurityExpressionHandler" />
+    </global-method-security>
+
+    <http security="none" pattern="/resource/**" />
+    <http security="none" pattern="/favicon.ico" />
+
+    <http use-expressions="true" create-session="stateless"
+          authentication-manager-ref="oauthClientAuthenticationManager"
+          entry-point-ref="oauthAuthenticationEntryPoint" pattern="/oauth/token">
+        <intercept-url pattern="/oauth/token"
+                       access="hasAuthority('OAUTH_CLIENT')" />
+        <http-basic />
+        <access-denied-handler ref="oauthAccessDeniedHandler" />
+        <expression-handler ref="webSecurityExpressionHandler" />
+    </http>
+
+    <http use-expressions="true" create-session="stateless"
+          entry-point-ref="oauthAuthenticationEntryPoint" pattern="/services/**">
+        <intercept-url pattern="/services/**"
+                       access="hasAuthority('USE_WEB_SERVICES')" />
+        <custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
+        <access-denied-handler ref="oauthAccessDeniedHandler" />
+        <expression-handler ref="webSecurityExpressionHandler" />
+    </http>
+
+    <http use-expressions="true">
+        <intercept-url pattern="/session/list"
+                       access="hasAuthority('VIEW_USER_SESSIONS')" />
+        <intercept-url pattern="/oauth/**"
+                       access="hasAuthority('USE_WEB_SERVICES')" />
+        <intercept-url pattern="/login/**" access="permitAll()" />
+        <intercept-url pattern="/login" access="permitAll()" />
+        <intercept-url pattern="/logout" access="permitAll()" />
+        <intercept-url pattern="/**" access="isFullyAuthenticated()" />
+        <form-login default-target-url="/ticket/list" login-page="/login"
+                    login-processing-url="/login/submit"
+                    authentication-failure-url="/login?loginFailed"
+                    username-parameter="username" password-parameter="password" />
+        <logout logout-url="/logout" logout-success-url="/login?loggedOut"
+                delete-cookies="JSESSIONID" invalidate-session="true" />
+        <session-management invalid-session-url="/login"
+                            session-fixation-protection="changeSessionId">
+            <concurrency-control error-if-maximum-exceeded="true" max-sessions="1"
+                                 session-registry-ref="sessionRegistry" />
+        </session-management>
+        <csrf />
+        <expression-handler ref="webSecurityExpressionHandler" />
+    </http>
+
+</beans:beans>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Publish-Subscribe:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="publish-subscribe-1.0.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Publish-Subscribe:war exploded" />
+    </root>
+  </artifact>
+</component>

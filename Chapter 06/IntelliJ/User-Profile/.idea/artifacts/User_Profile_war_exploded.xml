@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="User-Profile:war exploded">
+    <output-path>$PROJECT_DIR$/target/user-profile-1.0.0.SNAPSHOT</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="User-Profile/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="User-Profile" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1" />
+          <element id="library" level="project" name="Maven: org.glassfish.web:javax.servlet.jsp.jstl:1.2.2" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Spring-One-Context-XML-Config:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="spring-one-context-xml-config-1.0.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Spring-One-Context-XML-Config:war exploded" />
+    </root>
+  </artifact>
+</component>

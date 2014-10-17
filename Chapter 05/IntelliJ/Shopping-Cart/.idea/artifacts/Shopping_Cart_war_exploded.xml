@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Shopping-Cart:war exploded">
+    <output-path>$PROJECT_DIR$/target/shopping-cart-1.0.0.SNAPSHOT</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Shopping-Cart/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Shopping-Cart" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1" />
+          <element id="library" level="project" name="Maven: org.glassfish.web:javax.servlet.jsp.jstl:1.2.2" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

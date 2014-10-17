@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Advanced-Criteria:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="advanced-criteria-1.0.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Advanced-Criteria:war exploded" />
+    </root>
+  </artifact>
+</component>

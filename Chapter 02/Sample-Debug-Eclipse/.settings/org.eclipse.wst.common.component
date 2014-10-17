@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Sample-Debug-Eclipse">
+        <wb-resource deploy-path="/" source-path="/web" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/source/production/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/source/production/resources"/>
+        <property name="context-root" value="sample-debug"/>
+        <property name="java-output-path" value="/Sample-Debug-Eclipse/target/classes"/>
+    </wb-module>
+</project-modules>

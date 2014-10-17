@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/jsp/view/chat/chat.jsp" libraries="{bootstrap}" />
+    <file url="file://$PROJECT_DIR$/web/WEB-INF/tags/template/main.tag" libraries="{jquery-1.9.1, moment}" />
+  </component>
+</project>
+

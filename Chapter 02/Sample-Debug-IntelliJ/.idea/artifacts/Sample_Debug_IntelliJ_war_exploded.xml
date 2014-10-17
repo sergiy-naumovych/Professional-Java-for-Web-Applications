@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Sample-Debug-IntelliJ:war exploded">
+    <output-path>$PROJECT_DIR$/target/sample-debug-intellij-1.0.0.SNAPSHOT</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Sample-Debug-IntelliJ/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Sample-Debug-IntelliJ" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Compression-Filter:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="compression-filter-1.0.0.SNAPSHOT.war">
+      <element id="artifact" artifact-name="Compression-Filter:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Sample-Debug-IntelliJ:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="sample-debug-intellij-1.0.0.SNAPSHOT.war">
+      <element id="artifact" artifact-name="Sample-Debug-IntelliJ:war exploded" />
+    </root>
+  </artifact>
+</component>

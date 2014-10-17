@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Template-Tags:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="template-tags-1.0.0.SNAPSHOT.war">
+      <element id="artifact" artifact-name="Template-Tags:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Model-View-Controller:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="model-view-controller-1.0.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Model-View-Controller:war exploded" />
+    </root>
+  </artifact>
+</component>

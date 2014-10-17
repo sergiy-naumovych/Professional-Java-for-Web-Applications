@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+        http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <tlib-version>1.0</tlib-version>
+    <short-name>wrox</short-name>
+    <uri>http://www.wrox.com/jsp/tld/wrox</uri>
+
+    <tag>
+        <description><![CDATA[
+            This tag formats dates of varying types, including traditional
+            java.util.Date, java.util.Calendar, and implementations of
+            java.time.temporal.TemporalAccessor (LocalDate, LocalTime,
+            LocalDateTime, ZonedDateTime, OffsetDate, OffsetTime, OffsetDateTime,
+            and more). TemporalAccessor instances that don't contain time zone or
+            time offset information will be assumed to be in the user's time zone.
+            Dates, Calendars, and TemporalAccessors that do have time zone or time
+            offset information will be adjusted to the user's time zone.
+
+            For the purposes of resolving time zone information, the standard JSTL
+            configuration variable javax.servlet.jsp.jstl.fmt.timeZone will be used
+            unless the timeZone attribute is specified or the tag is nested within
+            <fmt:timeZone> actions.
+
+            For the purposes of resolving the locale information, the standard JSTL
+            configuration variables javax.servlet.jsp.jstl.fmt.local,
+            javax.servlet.jsp.jstl.fmt.fallbackLocale and
+            javax.servlet.jsp.jstl.fmt.localizationContext will be used according
+            to the JSTL specification.
+        ]]></description>
+        <name>formatDate</name>
+        <tag-class>com.wrox.site.tag.FormatDateTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>
+                The object representing a date and/or time that should be
+                formatted.
+            </description>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>"date" (default), "time", or "both"</description>
+            <name>type</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>
+                "default" (default), "short", "medium", "long", or "full" in
+                accordance with java.text.DateFormat.
+            </description>
+            <name>dateStyle</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>
+                "default" (default), "short", "medium", "long", or "full" in
+                accordance with java.text.DateFormat.
+            </description>
+            <name>timeStyle</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>
+                Defaults to false, specify true to put the time before the date.
+            </description>
+            <name>timeFirst</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>
+                Defaults to a single space ( ), used to specify a custom value to
+                separate the date and time with.
+            </description>
+            <name>separateDateTimeWith</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>
+                Discouraged from use. Specifies a custom pattern to format the
+                date and/or time with. type, dateStyle, timeStyle, timeFirst and
+                separateDateTimeWith are ignored if this is specified. Must follow
+                java.text.SimpleDateFormat contract if value is a Date or Calendar,
+                java.time.format.DateTimeFormatter if value is a TemporalAccessor.
+            </description>
+            <name>pattern</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>
+                Specifies a time zone that overrides the default time zone present
+                in the localization context, session, etc.
+            </description>
+            <name>timeZone</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>
+                Scope variable to save the formatted date to instead of inlining.
+                Exported scope variable will be of type java.lang.String.
+            </description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>
+                "page" (default), "request", "session", "application", scope of
+                exported variable. Ignored if var attribute not specified.
+            </description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <dynamic-attributes>false</dynamic-attributes>
+    </tag>
+
+    <function>
+        <description>
+            Abbreviates a string using ellipses (...) if the string is too long.
+            The string parameter is the string to shorten, the int parameter is
+            the maximum length the string should be, after which it will be
+            shortened.
+        </description>
+        <name>abbreviateString</name>
+        <function-class>org.apache.commons.lang3.StringUtils</function-class>
+        <function-signature>
+            java.lang.String abbreviate(java.lang.String,int)
+        </function-signature>
+    </function>
+
+    <function>
+        <description>
+            Formats a time interval in an attractive way, such as "less than one
+            second" or "ten seconds" or "about 12 minutes".
+        </description>
+        <name>timeIntervalToString</name>
+        <function-class>com.wrox.site.TimeUtils</function-class>
+        <function-signature>
+            java.lang.String intervalToString(long)
+        </function-signature>
+    </function>
+
+</taglib>

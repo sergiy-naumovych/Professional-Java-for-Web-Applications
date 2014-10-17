@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Discussion-Board:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="discussion-board-1.0.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Discussion-Board:war exploded" />
+    </root>
+  </artifact>
+</component>

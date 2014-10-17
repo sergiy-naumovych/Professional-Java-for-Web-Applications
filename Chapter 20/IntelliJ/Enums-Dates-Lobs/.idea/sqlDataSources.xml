@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="dd3c6812-0412-44b0-95de-587244f47264" />
+          <option name="name" value="Entity-Mappings" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/database/create.sql" />
+            </array>
+          </option>
+        </State>
+      </list>
+    </option>
+  </component>
+</project>
+

@@ -1,0 +1,84 @@
+CREATE DATABASE AdvancedMappings DEFAULT CHARACTER SET 'utf8'
+  DEFAULT COLLATE 'utf8_unicode_ci';
+
+USE AdvancedMappings;
+
+CREATE TABLE UserPrincipal (
+  UserId BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  Username VARCHAR(30) NOT NULL,
+  DateJoined TIMESTAMP(6) NULL,
+  UNIQUE KEY UserPrincipal_Username (Username)
+) ENGINE = InnoDB;
+
+CREATE TABLE Person (
+  PersonId BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  FirstName VARCHAR(60) NOT NULL,
+  LastName VARCHAR(60) NOT NULL,
+  PhoneNumber_CountryCode VARCHAR(5) NOT NULL,
+  PhoneNumber_Number VARCHAR(15) NOT NULL,
+  Address_Street VARCHAR(100) NOT NULL,
+  Address_City VARCHAR(100) NOT NULL,
+  Address_State VARCHAR(100) NULL,
+  Address_Country VARCHAR(100) NOT NULL,
+  Address_PostalCode_Code VARCHAR(10) NOT NULL,
+  Address_PostalCode_Suffix VARCHAR(5)
+) ENGINE = InnoDB;
+
+CREATE TABLE Applicant (
+  ApplicantId BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  FirstName VARCHAR(60) NOT NULL,
+  LastName VARCHAR(60) NOT NULL,
+  Citizen BOOLEAN NOT NULL
+) ENGINE = InnoDB;
+
+CREATE TABLE Applicant_Resume (
+  ResumeId BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  ApplicantId BIGINT UNSIGNED NOT NULL,
+  Title VARCHAR(100) NOT NULL,
+  Content TEXT NOT NULL,
+  CONSTRAINT Applicant_Resume_Applicant FOREIGN KEY (ApplicantId)
+    REFERENCES Applicant(ApplicantId) ON DELETE CASCADE
+) ENGINE = InnoDB;
+
+CREATE TABLE NewsArticle (
+  ArticleId BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  Revision BIGINT UNSIGNED NOT NULL,
+  DateCreated TIMESTAMP(6) NULL,
+  DateModified TIMESTAMP(6) NULL,
+  Title VARCHAR(100) NOT NULL,
+  Content TEXT NOT NULL
+) ENGINE = InnoDB;
+
+CREATE TABLE Employee (
+  EmployeeId BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  FirstName VARCHAR(50) NOT NULL,
+  LastName VARCHAR(50) NOT NULL
+) ENGINE = InnoDB;
+
+CREATE TABLE Employee_Phone (
+  Employee BIGINT UNSIGNED NOT NULL,
+  Priority SMALLINT UNSIGNED NOT NULL,
+  Number VARCHAR(20) NOT NULL,
+  CONSTRAINT Employee_Phone_Employee FOREIGN KEY (Employee)
+    REFERENCES Employee (EmployeeId) ON DELETE CASCADE
+) ENGINE = InnoDB;
+
+CREATE TABLE Employee_Address (
+  Employee BIGINT UNSIGNED NOT NULL,
+  Street VARCHAR(100) NOT NULL,
+  City VARCHAR(100) NOT NULL,
+  State VARCHAR(100) NULL,
+  Country VARCHAR(100) NOT NULL,
+  PostalCode_Code VARCHAR(10) NOT NULL,
+  PostalCode_Suffix VARCHAR(5),
+  CONSTRAINT Employee_Address_Employee FOREIGN KEY (Employee)
+    REFERENCES Employee(EmployeeId) ON DELETE CASCADE
+) ENGINE = InnoDB;
+
+CREATE TABLE Employee_Property (
+  Employee BIGINT UNSIGNED NOT NULL,
+  KeyName VARCHAR(100) NOT NULL,
+  Value VARCHAR(255) NOT NULL,
+  CONSTRAINT Employee_Property_Employee FOREIGN KEY (Employee)
+    REFERENCES Employee(EmployeeId) ON DELETE CASCADE
+) ENGINE = InnoDB;

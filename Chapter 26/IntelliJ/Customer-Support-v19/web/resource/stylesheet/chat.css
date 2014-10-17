@@ -1,0 +1,55 @@
+#chatContainer {
+    position: absolute;
+}
+
+#chatLog {
+    height: 225px;
+    max-height: 225px;
+    width: 400px;
+    overflow: auto;
+    border: 1px solid #AAA;
+    position: relative;
+    clear: both;
+    margin-bottom: 2px;
+}
+
+#chatLog div {
+    font-size: 10px;
+}
+#chatLog div.informational {
+    font-style: italic;
+    color: #AAA;
+}
+#chatLog div.error {
+    font-weight: bold;
+    color: #C00;
+}
+#chatLog span.user-me {
+    font-weight: bold;
+    color: #0A0;
+}
+#chatLog span.user-you {
+    font-weight: bold;
+    color: #55F;
+}
+
+#messageContainer {
+    width: 300px;
+    position: relative;
+    float: left;
+}
+
+#messageArea {
+    height: 75px; width:280px;
+}
+
+#buttonContainer {
+    width: 100px;
+    position: relative;
+    float: left;
+}
+
+#buttonContainer button {
+    width: 100px;
+    clear: both;
+}

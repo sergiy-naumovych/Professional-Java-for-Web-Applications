@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Spring-Forms:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="spring-forms-1.0.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Spring-Forms:war exploded" />
+    </root>
+  </artifact>
+</component>

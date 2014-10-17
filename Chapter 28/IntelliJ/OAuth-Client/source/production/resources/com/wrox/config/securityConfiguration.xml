@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:aop="http://www.springframework.org/schema/aop"
+             xmlns:oauth2="http://www.springframework.org/schema/security/oauth2"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-3.2.xsd
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+http://www.springframework.org/schema/security/oauth2
+http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
+
+    <oauth2:resource id="oAuth2ClientBean" client-authentication-scheme="header"
+                     client-id="TestClient" client-secret="y471l12D2y55U5558rd2"
+                     authentication-scheme="header" type="authorization_code"
+                     scope="READ,WRITE,TRUST"
+        user-authorization-uri="http://localhost:8080/support/oauth/authorize"
+        access-token-uri="http://localhost:8080/support/oauth/token" />
+
+    <beans:bean name="accessTokenRequestProxy" scope="request"
+                class="org.springframework.security.oauth2.client.token.DefaultAccessTokenRequest">
+        <aop:scoped-proxy />
+        <beans:constructor-arg index="0" value="#{request.parameterMap}" />
+        <beans:property name="currentUri"
+                        value="#{request.getAttribute('currentUri')}" />
+    </beans:bean>
+    <beans:bean name="clientContextProxy" scope="session"
+                class="org.springframework.security.oauth2.client.DefaultOAuth2ClientContext">
+        <aop:scoped-proxy />
+        <beans:constructor-arg index="0" ref="accessTokenRequestProxy" />
+    </beans:bean>
+    <beans:bean id="customerSupportRestTemplate"
+                class="com.wrox.site.OAuth2SigningRestTemplate">
+        <beans:constructor-arg index="0" ref="oAuth2ClientBean" />
+        <beans:constructor-arg index="1">
+            <beans:bean class="org.springframework.security.oauth2.config.OAuth2ClientContextFactoryBean">
+                <beans:property name="resource" ref="oAuth2ClientBean" />
+                <beans:property name="bareContext">
+                    <beans:bean class="org.springframework.security.oauth2.client.DefaultOAuth2ClientContext" />
+                </beans:property>
+                <beans:property name="scopedContext" ref="clientContextProxy" />
+            </beans:bean>
+        </beans:constructor-arg>
+        <beans:property name="messageConverters">
+            <beans:list value-type="org.springframework.http.converter.HttpMessageConverter">
+                <beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <beans:property name="objectMapper" ref="objectMapper" />
+                </beans:bean>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="Steve" password="apple" authorities="USER" />
+                <user name="Bill" password="orange" authorities="USER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+    <oauth2:client id="oAuth2ClientFilter" />
+
+    <http use-expressions="true">
+        <intercept-url pattern="/login/**" access="permitAll()" />
+        <intercept-url pattern="/login" access="permitAll()" />
+        <intercept-url pattern="/logout" access="permitAll()" />
+        <intercept-url pattern="/**" access="hasAuthority('USER')" />
+        <session-management invalid-session-url="/login"
+                            session-fixation-protection="changeSessionId" />
+        <csrf />
+        <form-login authentication-failure-url="/login?loginFailed"
+                    login-page="/login" login-processing-url="/login/submit"
+                    username-parameter="username" password-parameter="password"
+                    default-target-url="/" />
+        <logout logout-url="/logout" logout-success-url="/login?loggedOut"
+                delete-cookies="JSESSIONID" invalidate-session="true" />
+        <custom-filter ref="oAuth2ClientFilter"
+                       after="EXCEPTION_TRANSLATION_FILTER" />
+    </http>
+
+</beans:beans>
